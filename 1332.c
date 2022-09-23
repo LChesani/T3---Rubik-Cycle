@@ -101,17 +101,17 @@ void move(char identidade, Cubo *x){
     }
     if(identidade == 'U'){
         x->lados[0].blocos = rotDir(x->lados[0].blocos);
-        aux = copia_linha(x->lados[3].blocos[0], x->lados[1].blocos[0]);
-        aux = copia_linha(x->lados[5].blocos[0], aux);
-        aux = copia_linha(x->lados[4].blocos[0], aux);
-        aux = copia_linha(x->lados[1].blocos[0], aux);
-    }
-    if(identidade == 'u'){
-        x->lados[0].blocos = rotEsq(x->lados[0].blocos);
         aux = copia_linha(x->lados[4].blocos[0], x->lados[1].blocos[0]);
         aux = copia_linha(x->lados[5].blocos[0], aux);
         aux = copia_linha(x->lados[3].blocos[0], aux);
         aux = copia_linha(x->lados[1].blocos[0], aux);
+    }
+    if(identidade == 'u'){
+        x->lados[0].blocos = rotEsq(x->lados[0].blocos);
+        aux = copia_linha(x->lados[1].blocos[0], x->lados[4].blocos[0]);
+        aux = copia_linha(x->lados[3].blocos[0], aux);
+        aux = copia_linha(x->lados[5].blocos[0], aux);
+        aux = copia_linha(x->lados[4].blocos[0], aux);
     }
     if(identidade == 'D'){
         x->lados[2].blocos = rotDir(x->lados[2].blocos);
@@ -143,17 +143,17 @@ void move(char identidade, Cubo *x){
     }
     if(identidade == 'L'){
         x->lados[4].blocos = rotDir(x->lados[4].blocos);
+        aux2 = copia_coluna(x->lados[0].blocos, x->lados[5].blocos, 0);
+        aux2 = copia_coluna(x->lados[1].blocos, aux2, 0);
+        aux2 = copia_coluna(x->lados[2].blocos, aux2, 0);
+        aux2 = copia_coluna(x->lados[5].blocos, aux2, 0);
+    }
+    if(identidade == 'l'){
+        x->lados[4].blocos = rotEsq(x->lados[4].blocos);
         aux2 = copia_coluna(x->lados[0].blocos, x->lados[1].blocos, 0);
         aux2 = copia_coluna(x->lados[5].blocos, aux2, 0);
         aux2 = copia_coluna(x->lados[2].blocos, aux2, 0);
         aux2 = copia_coluna(x->lados[1].blocos, aux2, 0);
-    }
-    if(identidade == 'l'){
-        x->lados[4].blocos = rotEsq(x->lados[4].blocos);
-        aux2 = copia_coluna(x->lados[1].blocos, x->lados[0].blocos, 0);
-        aux2 = copia_coluna(x->lados[2].blocos, aux2, 0);
-        aux2 = copia_coluna(x->lados[5].blocos, aux2, 0);
-        aux2 = copia_coluna(x->lados[0].blocos, aux2, 0);
     }
     if(identidade == 'F'){
         x->lados[1].blocos = rotDir(x->lados[1].blocos);
