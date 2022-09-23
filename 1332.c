@@ -52,7 +52,7 @@ char **rotDir(char **l){
     return aux;
 }
 
-char *copia(char *v1, char *v2){
+char *copia_linha(char *v1, char *v2){
     char *aux = (char*) malloc(3*sizeof(char));
     for(int i = 0; i < 3; i++){
         aux[i] = v1[i]; //backup
@@ -63,21 +63,84 @@ char *copia(char *v1, char *v2){
     return aux;
 }
 
+char **copia_coluna(char **v1, char **v2, int coluna){
+    char **aux = (char**) malloc(3 * sizeof(char*));
+    for(int i = 0; i < 3; i++){
+        aux[i] = (char*) malloc(sizeof(char));
+    }
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            aux[i][j] = v1[i][j];
+        }
+    }
+
+    for(int i = 0; i < 3; i++){
+        v1[i][coluna] = v2[i][coluna];
+    }
+    return aux;
+}
+
 void move(char identidade, Cubo *x){
     char *aux = (char*) malloc(3 * sizeof(char));
+    char **aux2 = (char**) malloc(3 * sizeof(char*));
+    for(int i = 0; i < 3; i++){
+        aux2[i] = (char*) malloc(sizeof(char));
+    }
     if(identidade == 'U'){
         x->lados[0].blocos = rotDir(x->lados[0].blocos);
-        aux = copia(x->lados[3].blocos[0], x->lados[1].blocos[0]);
-        aux = copia(x->lados[5].blocos[0], aux);
-        aux = copia(x->lados[4].blocos[0], aux);
-        aux = copia(x->lados[1].blocos[0], aux);
+        aux = copia_linha(x->lados[3].blocos[0], x->lados[1].blocos[0]);
+        aux = copia_linha(x->lados[5].blocos[0], aux);
+        aux = copia_linha(x->lados[4].blocos[0], aux);
+        aux = copia_linha(x->lados[1].blocos[0], aux);
+    }
+    if(identidade == 'u'){
+        x->lados[0].blocos = rotEsq(x->lados[0].blocos);
+        aux = copia_linha(x->lados[4].blocos[0], x->lados[1].blocos[0]);
+        aux = copia_linha(x->lados[5].blocos[0], aux);
+        aux = copia_linha(x->lados[3].blocos[0], aux);
+        aux = copia_linha(x->lados[1].blocos[0], aux);
     }
     if(identidade == 'D'){
-        x->lados[0].blocos = rotDir(x->lados[0].blocos);
-        aux = copia(x->lados[3].blocos[2], x->lados[1].blocos[0]);
-        aux = copia(x->lados[5].blocos[2], aux);
-        aux = copia(x->lados[4].blocos[2], aux);
-        aux = copia(x->lados[1].blocos[2], aux);
+        x->lados[2].blocos = rotDir(x->lados[2].blocos);
+        aux = copia_linha(x->lados[3].blocos[2], x->lados[1].blocos[2]);
+        aux = copia_linha(x->lados[5].blocos[2], aux);
+        aux = copia_linha(x->lados[4].blocos[2], aux);
+        aux = copia_linha(x->lados[1].blocos[2], aux);
+    }
+    if(identidade == 'd'){
+        x->lados[2].blocos = rotEsq(x->lados[2].blocos);
+        aux = copia_linha(x->lados[4].blocos[2], x->lados[1].blocos[2]);
+        aux = copia_linha(x->lados[5].blocos[2], aux);
+        aux = copia_linha(x->lados[3].blocos[2], aux);
+        aux = copia_linha(x->lados[1].blocos[2], aux);
+    }
+    if(identidade == 'R'){
+        x->lados[3].blocos = rotDir(x->lados[3].blocos);
+        aux2 = copia_coluna(x->lados[0].blocos, x->lados[1].blocos, 2);
+        aux2 = copia_coluna(x->lados[5].blocos, aux2, 2);
+        aux2 = copia_coluna(x->lados[2].blocos, aux2, 2);
+        aux2 = copia_coluna(x->lados[1].blocos, aux2, 2);
+    }
+    if(identidade == 'r'){
+        x->lados[3].blocos = rotEsq(x->lados[3].blocos);
+        aux2 = copia_coluna(x->lados[1].blocos, x->lados[0].blocos, 2);
+        aux2 = copia_coluna(x->lados[2].blocos, aux2, 2);
+        aux2 = copia_coluna(x->lados[5].blocos, aux2, 2);
+        aux2 = copia_coluna(x->lados[0].blocos, aux2, 2);
+    }
+    if(identidade == 'L'){
+        x->lados[4].blocos = rotDir(x->lados[4].blocos);
+        aux2 = copia_coluna(x->lados[0].blocos, x->lados[1].blocos, 0);
+        aux2 = copia_coluna(x->lados[5].blocos, aux2, 0);
+        aux2 = copia_coluna(x->lados[2].blocos, aux2, 0);
+        aux2 = copia_coluna(x->lados[1].blocos, aux2, 0);
+    }
+    if(identidade == 'l'){
+        x->lados[4].blocos = rotEsq(x->lados[4].blocos);
+        aux2 = copia_coluna(x->lados[1].blocos, x->lados[0].blocos, 0);
+        aux2 = copia_coluna(x->lados[2].blocos, aux2, 0);
+        aux2 = copia_coluna(x->lados[5].blocos, aux2, 0);
+        aux2 = copia_coluna(x->lados[0].blocos, aux2, 0);
     }
 }
 
@@ -109,8 +172,8 @@ int iguais(Cubo *a, Cubo *b){
 int simulacao(char *input, Cubo *x){
     Cubo *ini;
     inicializa_cubo(&ini);
-    int count = 0;
-    while(!iguais(x, ini)){
+    int count = 1;
+    while(iguais(x, ini) == 0){
         for(int i = 0; input[i] != '\0'; i++){
             move(input[i], x);
         }
@@ -128,8 +191,8 @@ int main(void){
     for(int i = 0; input[i] != '\0'; i++){
         move(input[i], x);
     }
-    
-    printf("%d", simulacao(input, x));
+
+    printf("%d\n", simulacao(input, x));
 
 
     return 0;
