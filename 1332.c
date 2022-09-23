@@ -203,7 +203,7 @@ int simulacao(char *input, Cubo *x){
     Cubo *ini;
     inicializa_cubo(&ini);
     int count = 1;
-    while(iguais(x, ini) == 0){
+    while(!iguais(x, ini)){
         for(int i = 0; input[i] != '\0'; i++){
             move(input[i], x);
         }
