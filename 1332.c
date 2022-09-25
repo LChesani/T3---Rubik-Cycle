@@ -121,10 +121,10 @@ void move(char identidade, Cubo *x) {
   }
   if (identidade == 'd') {
     x->lados[2].blocos = rotEsq(x->lados[2].blocos);
-    aux = copia_linha(x->lados[4].blocos[2], x->lados[1].blocos[2]);
+    aux = copia_linha(x->lados[1].blocos[2], x->lados[3].blocos[2]);
+    aux = copia_linha(x->lados[4].blocos[2], aux);
     aux = copia_linha(x->lados[5].blocos[2], aux);
     aux = copia_linha(x->lados[3].blocos[2], aux);
-    aux = copia_linha(x->lados[1].blocos[2], aux);
   }
   if (identidade == 'R') {
     x->lados[3].blocos = rotDir(x->lados[3].blocos);
@@ -149,10 +149,10 @@ void move(char identidade, Cubo *x) {
   }
   if (identidade == 'l') {
     x->lados[4].blocos = rotEsq(x->lados[4].blocos);
-    aux2 = copia_coluna(x->lados[0].blocos, x->lados[1].blocos, 0);
-    aux2 = copia_coluna(x->lados[5].blocos, aux2, 0);
+    aux2 = copia_coluna(x->lados[5].blocos, x->lados[0].blocos, 0);
     aux2 = copia_coluna(x->lados[2].blocos, aux2, 0);
     aux2 = copia_coluna(x->lados[1].blocos, aux2, 0);
+    aux2 = copia_coluna(x->lados[0].blocos, aux2, 0);
   }
   if (identidade == 'F') {
     x->lados[1].blocos = rotDir(x->lados[1].blocos);
