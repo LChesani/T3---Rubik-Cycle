@@ -105,77 +105,77 @@ void move(char identidade, Cubo *x) {
     aux = copia_linha(x->lados[3].blocos[0], aux);
     aux = copia_linha(x->lados[1].blocos[0], aux);
   }
-  if (identidade == 'u') {
+  else if (identidade == 'u') {
     x->lados[0].blocos = rotEsq(x->lados[0].blocos);
     aux = copia_linha(x->lados[1].blocos[0], x->lados[4].blocos[0]);
     aux = copia_linha(x->lados[3].blocos[0], aux);
     aux = copia_linha(x->lados[5].blocos[0], aux);
     aux = copia_linha(x->lados[4].blocos[0], aux);
   }
-  if (identidade == 'D') {
+  else if (identidade == 'D') {
     x->lados[2].blocos = rotDir(x->lados[2].blocos);
     aux = copia_linha(x->lados[3].blocos[2], x->lados[1].blocos[2]);
     aux = copia_linha(x->lados[5].blocos[2], aux);
     aux = copia_linha(x->lados[4].blocos[2], aux);
     aux = copia_linha(x->lados[1].blocos[2], aux);
   }
-  if (identidade == 'd') {
+  else if (identidade == 'd') {
     x->lados[2].blocos = rotEsq(x->lados[2].blocos);
     aux = copia_linha(x->lados[1].blocos[2], x->lados[3].blocos[2]);
     aux = copia_linha(x->lados[4].blocos[2], aux);
     aux = copia_linha(x->lados[5].blocos[2], aux);
     aux = copia_linha(x->lados[3].blocos[2], aux);
   }
-  if (identidade == 'R') {
+  else if (identidade == 'R') {
     x->lados[3].blocos = rotDir(x->lados[3].blocos);
     aux2 = copia_coluna(x->lados[0].blocos, x->lados[1].blocos, 2);
     aux2 = copia_coluna(x->lados[5].blocos, aux2, 2);
     aux2 = copia_coluna(x->lados[2].blocos, aux2, 2);
     aux2 = copia_coluna(x->lados[1].blocos, aux2, 2);
   }
-  if (identidade == 'r') {
+  else if (identidade == 'r') {
     x->lados[3].blocos = rotEsq(x->lados[3].blocos);
     aux2 = copia_coluna(x->lados[1].blocos, x->lados[0].blocos, 2);
     aux2 = copia_coluna(x->lados[2].blocos, aux2, 2);
     aux2 = copia_coluna(x->lados[5].blocos, aux2, 2);
     aux2 = copia_coluna(x->lados[0].blocos, aux2, 2);
   }
-  if (identidade == 'L') {
+  else if (identidade == 'L') {
     x->lados[4].blocos = rotDir(x->lados[4].blocos);
     aux2 = copia_coluna(x->lados[0].blocos, x->lados[5].blocos, 0);
     aux2 = copia_coluna(x->lados[1].blocos, aux2, 0);
     aux2 = copia_coluna(x->lados[2].blocos, aux2, 0);
     aux2 = copia_coluna(x->lados[5].blocos, aux2, 0);
   }
-  if (identidade == 'l') {
+  else if (identidade == 'l') {
     x->lados[4].blocos = rotEsq(x->lados[4].blocos);
     aux2 = copia_coluna(x->lados[5].blocos, x->lados[0].blocos, 0);
     aux2 = copia_coluna(x->lados[2].blocos, aux2, 0);
     aux2 = copia_coluna(x->lados[1].blocos, aux2, 0);
     aux2 = copia_coluna(x->lados[0].blocos, aux2, 0);
   }
-  if (identidade == 'F') {
+  else if (identidade == 'F') {
     x->lados[1].blocos = rotDir(x->lados[1].blocos);
     aux = linha_coluna(x->lados[3].blocos, x->lados[0].blocos[2], 0);
     aux = copia_linha(x->lados[2].blocos[2], aux);
     aux = linha_coluna(x->lados[4].blocos, aux, 2);
     aux = copia_linha(x->lados[0].blocos[2], aux);
   }
-  if (identidade == 'f') {
+  else if (identidade == 'f') {
     x->lados[1].blocos = rotEsq(x->lados[1].blocos);
     aux = linha_coluna(x->lados[4].blocos, x->lados[0].blocos[2], 2);
     aux = copia_linha(x->lados[2].blocos[2], aux);
     aux = linha_coluna(x->lados[3].blocos, aux, 0);
     aux = copia_linha(x->lados[0].blocos[2], aux);
   }
-  if (identidade == 'B') {
+  else if (identidade == 'B') {
     x->lados[5].blocos = rotDir(x->lados[5].blocos);
     aux = linha_coluna(x->lados[4].blocos, x->lados[0].blocos[0], 0);
     aux = copia_linha(x->lados[2].blocos[0], aux);
     aux = linha_coluna(x->lados[3].blocos, aux, 2);
     aux = copia_linha(x->lados[0].blocos[0], aux);
   }
-  if (identidade == 'b') {
+  else if (identidade == 'b') {
     x->lados[5].blocos = rotEsq(x->lados[5].blocos);
     aux = linha_coluna(x->lados[3].blocos, x->lados[0].blocos[0], 2);
     aux = copia_linha(x->lados[2].blocos[0], aux);
@@ -183,6 +183,9 @@ void move(char identidade, Cubo *x) {
     aux = copia_linha(x->lados[0].blocos[0], aux);
   }
   free(aux);
+  for(int i = 0; i < 3; i++){
+    free(aux2[i]);
+  }
   free(aux2);
 }
 
